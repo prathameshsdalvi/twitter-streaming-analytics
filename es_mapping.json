@@ -1,0 +1,184 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": "5",
+      "number_of_replicas": "1"
+    },
+    "analysis": {
+      "analyzer": {
+        "autocomplete": {
+          "tokenizer": "autocomplete",
+          "filter": [
+            "lowercase"
+          ]
+        },
+        "autocomplete_search": {
+          "tokenizer": "lowercase"
+        },
+        "tweet_analyzer": {
+          "tokenizer": "standard",
+          "char_filter": "html_strip",
+          "filter": [
+            "lowercase",
+            "stop",
+            "english_stemmer"
+          ]
+        }
+      },
+      "filter": {
+        "english_stemmer": {
+          "type": "stemmer",
+          "name": "english"
+        }
+      },
+      "tokenizer": {
+        "autocomplete": {
+          "type": "edge_ngram",
+          "min_gram": 1,
+          "max_gram": 10,
+          "token_chars": [
+            "letter"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "big_data_tweets_type": {
+      "properties": {
+        "sentiment": {
+          "type": "text",
+          "analyzer": "autocomplete",
+          "search_analyzer": "autocomplete_search",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "in_reply_to_status_id": {
+          "type": "float"
+        },
+        "possibly_sensitive": {
+          "type": "boolean"
+        },
+        "@SequenceNumber": {
+          "type": "text"
+        },
+        "created_at": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss"
+        },
+        "reply_count": {
+          "type": "float"
+        },
+        "retweet_count": {
+          "type": "float"
+        },
+        "features": {
+          "properties": {
+            "name": {
+              "type": "text",
+              "analyzer": "autocomplete",
+              "search_analyzer": "autocomplete_search",
+              "fields": {
+                "keyword": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
+        "@timestamp": {
+          "type": "date"
+        },
+        "in_reply_to_screen_name": {
+          "type": "text",
+          "analyzer": "autocomplete",
+          "search_analyzer": "autocomplete_search",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "entities": {
+          "properties": {
+            "hashtags": {
+              "type": "text",
+              "analyzer": "autocomplete",
+              "search_analyzer": "autocomplete_search",
+              "fields": {
+                "keyword": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
+        "favorite_count": {
+          "type": "float"
+        },
+        "id": {
+          "type": "float"
+        },
+        "text": {
+          "type": "text",
+          "analyzer": "tweet_analyzer",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "quote_count": {
+          "type": "float"
+        },
+        "user": {
+          "properties": {
+            "screen_name": {
+              "type": "text",
+              "analyzer": "autocomplete",
+              "search_analyzer": "autocomplete_search",
+              "fields": {
+                "keyword": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "followers_count": {
+              "type": "float"
+            },
+            "name": {
+              "type": "text",
+              "analyzer": "autocomplete",
+              "search_analyzer": "autocomplete_search",
+              "fields": {
+                "keyword": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "created_at": {
+              "type": "date",
+              "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "location": {
+              "type": "text",
+              "analyzer": "autocomplete",
+              "search_analyzer": "autocomplete_search",
+              "fields": {
+                "keyword": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "id": {
+              "type": "float"
+            }
+          }
+        }
+      }
+    }
+  }
+}
