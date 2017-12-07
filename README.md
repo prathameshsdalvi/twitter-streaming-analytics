@@ -27,7 +27,7 @@ Follow the instructions provided in the `ec2_machine_setup.bash` file. The instr
 - Connect to your EC2 instance
   + Go to your AWS EC2 dashboard and ensure that your EC2 instance is running (you may use the EC2 instance available as a part of the free tier)
   + Right click on the instance, click on `Connect` and note down the Public DNS which will be used to SSH to the EC2 instance
-  + Open Bash
+  + Open BASH
   + Follow the steps as per `ec2_machine_setup.bash` to connect to the machine
   
 - Install Python 2.7 and the Python libraries
@@ -114,13 +114,13 @@ while True:
   time.sleep(1.0)
 ```
 
-To test your stream, run the following on the your current Bash window.
+To test your stream, run the following on the your current BASH window.
 
 ```python
 python ~/big_data_project/final_pipeline/twitter_to_kinesis.py
 ```
 
-This starts feeding Twitter stream into the Kinesis Stream
+This starts feeding Twitter stream into the Kinesis Stream.
 
 Open another Bash window, SSH to the same EC2 machine and run your consumer.
 
@@ -161,7 +161,7 @@ table.meta.client.get_waiter('table_exists').wait(TableName='big_data_tweets')
 
 ## Processing and Storing Stream in DynamoDB
 
-Before we store our stream in the DynamoDB table, we process it to extract the fields from the raw tweet which are useful to us. We also add additional features to our processed tweet. Refer to `kinesis_to_dynamodb.py` for the code.
+Before we store our stream in the DynamoDB table, we process it to extract the fields from the raw tweet, which are useful to us. We also add additional features to our processed tweet. Refer to `kinesis_to_dynamodb.py` for the code.
 
 Execute this code:
 
@@ -254,9 +254,9 @@ Click `Add inline policy` and select `Custom Policy`. Create the following inlin
   
 ## Creating Lambda Function
 
-- Go to `Lambda` under `Services` and click on `Create function` then `Author from scratch`. Name the function *dynamodb_to_es*, select runtime as `Python 2.7`, `Choose an existing role` as role, select the `dynamodb_to_es` IAM role as the existing role and create the function.
+- Go to `Lambda` under `Services` and click on `Create function` then `Author from scratch`. Name the function *dynamodb_to_es*, select runtime as `Python 2.7`, `Choose an existing role` as role, select the `dynamodb_to_es` IAM role that you created above, as the existing role and create the function.
 
-- Scroll down and paste the code in `lambda.py` in the function code window labeled `lambda_function`. Ensure to change the ES_ENDPOINT in the code to your Elasticsearch Endpoint. It should be of the form `search-your-es-endpoint-xxxxxxxxxxxxxxxxxxxxxxxxxx.us-east-1.es.amazonaws.com/` without the `https://`.
+- Scroll down and paste the code from the `lambda.py` file in the function code window labeled `lambda_function`. Ensure to change the ES_ENDPOINT in the code to your Elasticsearch Endpoint. It should be of the form `search-your-es-endpoint-xxxxxxxxxxxxxxxxxxxxxxxxxx.us-east-1.es.amazonaws.com/` without the `https://`.
 
 - Scroll down further and under Basic settings, set timeout to 5 minutes.
 
@@ -267,9 +267,9 @@ Click `Add inline policy` and select `Custom Policy`. Create the following inlin
 
 ## Creating Elasticsearch Mapping
 
-- A mapping in Elasticsearch is a schema that defines how the data is indexed for search and aggregation. Here we create custom analyzers which enable various text fields to be analyzed in multiple ways. Phone features and Hashtags have multi-fields, one each for aggregation and search. They support partial search and are not case sensitive. The tweet text also uses multi-fields, with aggregation supported for the complete tweet and a search which supports searching for words with the same root and is not case sensitive.
+- A mapping in Elasticsearch is a schema that defines how the data is indexed for search and aggregation. Here we create custom analyzers which enable various text fields to be analyzed in multiple ways. Phone features and Hashtags have multi-fields, one each for aggregation and search. They support partial search and are not case sensitive. The tweet text also uses multi-fields, with aggregation supported for the complete tweet and a search which supports searching for words with the same root. It is not case sensitive.
 
-- To create the mapping, click on the ElasticSearch Head extension icon in Google Chrome. Paste the Elasticsearch endpoint in the empty box at the top and click `Connect`. After a few seconds, you should be connected to the instance.
+- To create the mapping, click on the ElasticSearch Head extension icon in Google Chrome. The extension lets you create a mapping with ease using an intuitive UI. Paste the Elasticsearch endpoint in the empty box at the top and click `Connect`. After a few seconds, you should be connected to the instance.
 
 - Go to the `Any Request` tab, expand `Query`, paste the Elasticsearch endpoint link in the top-most box, `big_data_tweets` in the box below it and select `PUT` from the drop-down menu. `PUT` is used to create an index named `big_data_tweets` in the mentioned Elasticsearch instance.
 
@@ -296,23 +296,23 @@ Click `Add inline policy` and select `Custom Policy`. Create the following inlin
 
 - Once the codes start running, go back to the DynamoDB table and check if the new items are getting indexed.
 
-- Then go to the ElasticSearch Head extension window and refresh the overview tab. You should see the data getting indexed in your index.
+- Then go to the ElasticSearch Head extension window and refresh the overview tab. You should see the data getting indexed in your Elasticsearch index.
 
 
 ## Creating Kibana Dashboard
 
 Use your Kibana link to open the Kibana dashboard. You are all set to visualize your live analyzed twitter stream according to your need! Learn more about creating Kibana dashboards [here](https://www.elastic.co/guide/en/kibana/5.5/dashboard-getting-started.html).
 
-## Scope and Applications
+## Scope and Applications of the Project
 
 - **360 product overview**   
-  Build a holistic understanding of your products, by integrating social media with internal data
+  Build a holistic understanding of your products, by integrating social media with internal data.
 
 - **Key Influencers**   
-  Find people who are brand advocates and have a big following, to be potential brand ambassadors
+  Find people who are brand advocates and have a big following, to be potential brand ambassadors.
 
 - **Competitive Analytics**   
-  Understand your competitors' strategy and engagement with user on social media
+  Understand your competitors' strategy and engagement with user on social media.
 
 - **Policy making**   
-  Gauge how the public reacts to important policy decisions
+  Gauge how the public reacts to important policy decisions.
