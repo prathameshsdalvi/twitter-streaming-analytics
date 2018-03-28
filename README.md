@@ -319,20 +319,20 @@ Use your Kibana link to open the Kibana dashboard. You are all set to visualize 
 
 ## References:
 
-- **AWS**
+- **AWS**   
 http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html   
 http://docs.aws.amazon.com/streams/latest/dev/introduction.html   
 http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html   
 http://docs.aws.amazon.com/lambda/latest/dg/welcome.html   
 http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/what-is-amazon-elasticsearch-service.html   
 
-- **Elasticsearch**
+- **Elasticsearch**   
 https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html   
 https://chrome.google.com/webstore/detail/elasticsearch-head/ffmkiejjmecolpfloofpjologoblkegm?hl=en-US   
 
-- **Kibana**
+- **Kibana**   
 https://www.elastic.co/guide/en/kibana/5.5/dashboard-getting-started.html   
 
-- **Other**
+- **Other**   
 https://medium.com/@vladyslavhoncharenko/how-to-index-new-and-existing-amazon-dynamodb-content-with-amazon-elasticsearch-service-30c1bbc91365   
 https://blog.insightdatascience.com/getting-started-with-aws-serverless-architecture-tutorial-on-kinesis-and-dynamodb-using-twitter-38a1352ca16d   
